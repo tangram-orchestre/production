@@ -1,0 +1,23 @@
+services:
+  nginx:
+    image: nginx:1.27.0
+    container_name: website
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - backend
+    volumes:
+      - ./www:/usr/share/nginx/html:ro
+    labels:
+      - traefik.enable=true
+      - "traefik.http.routers.website.rule=Host(`tangram-orchestre.fr`) || Host(`www.tangram-orchestre.fr`)"
+      - "traefik.http.middlewares.redirect-none-to-www.redirectregex.regex=^https://tangram-orchestre\\.fr(.*)$$"
+      - "traefik.http.middlewares.redirect-none-to-www.redirectregex.replacement=https://www.tangram-orchestre.fr$${1}"
+      - traefik.http.routers.website.middlewares=redirect-none-to-www@docker
+      - traefik.http.routers.website.tls=true
+      - traefik.http.routers.website.tls.certresolver=resolver
+
+networks:
+  backend:
+    external: true
