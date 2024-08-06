@@ -3,3 +3,4 @@ include:
   - ./authentik/docker-compose.yaml
   - ./planka/docker-compose.yaml
   - ./website/docker-compose.yaml
+  - ./watchtower/docker-compose.yaml
