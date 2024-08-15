@@ -21,7 +21,7 @@ entryPoints:
 certificatesResolvers:
   resolver:
     acme:
-      email: contact@tangram-orchestre.fr
+      email: admin@tangram-orchestre.fr
       storage: /etc/traefik/acme.json
       httpChallenge:
         # used during the challenge
