@@ -1,14 +1,12 @@
 services:
-  nginx:
-    image: nginx:1.27.0
-    container_name: website
+  showcase-website:
+    image: ghcr.io/tangram-orchestre/showcase-website:latest
+    container_name: showcase-website
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
     networks:
       - backend
-    volumes:
-      - ./www:/usr/share/nginx/html:ro
     labels:
       - traefik.enable=true
       - "traefik.http.routers.website.rule=Host(`tangram-orchestre.fr`) || Host(`www.tangram-orchestre.fr`)"
